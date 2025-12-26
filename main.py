@@ -1,14 +1,28 @@
-# Programa: Gerenciador de Tarefas Simples - CLI
-# Autor: Ednaldo Aquino
-# Descrição: Projeto em Python para gerenciamento de tarefas via terminal.
+# main.py
 
-print('===================================================')
-print('    GERENCIADOR DE TAREFAS SIMPLES - CLI    ')
-print('===================================================')
-
-nome_usuario = input('Digite seu nome:')
-
-print(f'\nOlá, {nome_usuario}! Bem-vindo ao Sistema.')
-print('Este projeto será desenvolvido passo a passo.')
+def exibir_menu():
+    print('\n=== GERENCIADOR DE TAREFAS ===')
+    print('1. Adicionar tarefa')
+    print('2. Listar tarefas')
+    print('3. Sair')
 
 
+def main():
+    while True:
+        exibir_menu()
+        opcao = input('Escolha uma opção:')
+
+        if opcao == '1':
+            print('Funcionalidade de adicionar tarefa em desenvolvimento.')
+        elif opcao == '2':
+            print('Funcionalidade de adicionar tarefas em desenvolvimento.')
+        elif opcao == '3':
+            print('Saindo do programa...')
+            break
+        else:
+            print('Opção inválida. Tente novamente.')
+    
+
+ 
+if __name__ == '__main__':
+    main()
