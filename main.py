@@ -1,3 +1,6 @@
+import json
+import os
+
 tarefas = []
 
 def exibir_menu():
@@ -16,6 +19,9 @@ def adicionar_tarefa():
    Adiciona uma nova tarefa à lista.
    '''
     descricao = input('Digite a descrição da tarefa:')
+    tarefas.append(tarefas)
+    salvar_tarefas(tarefas)
+    print('Tarefa adicionada com sucesso!')
     if descricao.strip() == '':
         print('A tarefa não pode ser vazia.')
     else:
@@ -34,6 +40,7 @@ def listar_tarefas():
         for indice, tarefa in enumerate(tarefas, start=1):
             print(f'{indice}. {tarefa}')
 
+
 def remover_tarefa():
     '''
     Remove uma tarefa da lista.
@@ -45,16 +52,30 @@ def remover_tarefa():
     listar_tarefas()
 
     try:
-        numero = int(input(('Digite o número da tarefa que deseja remover:')))
-        indice = numero - 1
-        if 0 <= indice < len(tarefas):
-            tarefas_removida = tarefas.pop(indice)
-            print(f'Tarefa removida: {tarefas_removida}')
-        else:
-            print('Número invalido.')
-    except ValueError:
-        print('Por favor, digite um numero valido.')
-        
+        indice = int(input('Digite o numero da tarefa que deseja remover:'))
+        tarefa_removida = tarefas.pop(indice - 1)
+        salvar_tarefas(tarefas)
+        print(f'Tarefa removida: {tarefa_removida}')
+    except (ValueError, IndexError):
+        print('Opção inválida. tente novamente.')
+
+
+def carregar_tarefas():
+    '''
+    Carrega as tarefas do arquivo JSON.
+    '''
+    if not os.path.exists(ARQUIVO_TAREFAS):
+        return []
+    with open(ARQUIVO_TAREFAS, 'r', encoding= 'utf-8') as arquivo:
+        return json.load(arquivo)
+    
+def salvar_tarefas(tarefas):
+    '''
+    Salva as tarefas no arquivo JSON.
+    '''
+    with open(ARQUIVO_TAREFAS, 'w', encoding= 'utf-8') as arquivo:
+        json.dump(tarefas, arquivo, ensure_ascii=False, indent=2)
+
 def main():
     while True:
         exibir_menu()
