@@ -15,52 +15,54 @@ def carregar_tarefas():
         return json.load(arquivo)
     
 def salvar_tarefas(tarefas):
-    with open(ARQUIVO_TAREFAS, 'w', ecoding='utf-8') as arquivo:
+    with open(ARQUIVO_TAREFAS, 'w', encoding='utf-8') as arquivo:
         json.dump(tarefas, arquivo, ensure_ascii=False, indent=2)
 
 # -----------------------
 # Funcionalidades
 # -----------------------
 def adicionar_tarefa(tarefas):
-    descricao = input('Digite a descrição da Tarefa').strip()
+    descricao = input('Digite a descrição da Tarefa:').strip()
 
-    if descricao == '':
+    if not descricao:
         print('A tarefa não pode ser vazia!')
         return tarefas
     
     tarefas.append(descricao)
     salvar_tarefas(tarefas)
+
     print('Tarefa adicionada com sucesso')
     return tarefas
 
 def listar_tarefas(tarefas):
-    tarefas = carregar_tarefas()
-
-    if len(tarefas) == 0:
-        print('Nenhuma tarefa cadrastada')
-        return
-    
     print('\n--- TAREFAS ---')
-    for indice, tarefa in enumerate(tarefas, start=1):
-     print(f'{indice}. {tarefa}')
-             
-def remover_tarefa(tarefas):
-    tarefas = carregar_tarefas()
 
-    if len(tarefas) == 0:
-        print('Nenhuma tarefa cadrastada para remover')
+    if not tarefas:
+        print('Nenhuma tarefa cadastrada.')
+    else:
+        for i, tarefa in enumerate(tarefas, start=1):
+            print(f'{i}')
+
+            input('\nPressione ENTER para voltar ao menu...')
+        
+
+def remover_tarefa(tarefas):
+    if not tarefas:
+        print('Nenhuma tarefa para remover.')
+        input('Pressione ENTER para voltar ao menu...')
         return tarefas
     
     listar_tarefas(tarefas)
 
     try:
-        indice = int(input('Digite o número da tarefa que deseja remover:'))
-        tarefa_removida = tarefas.pop(indice -1)
+        indice = int(input('Digite o número da tarefa:'))
+        tarefa_removida = tarefas.pop(indice - 1)
         salvar_tarefas(tarefas)
         print(f'Tarefa removida: {tarefa_removida}')
     except (ValueError, IndexError):
-        print('Opção invalida!')
+        print('Número invalido.')
 
+        input('Pressione ENTER para voltar ao menu')
         return tarefas
     
 
@@ -79,7 +81,11 @@ def main():
     tarefas = carregar_tarefas()
 
     while True:
-        exibir_menu()
+        print('\n1. Adicionar tarefa')
+        print('2. Listar tarefas')
+        print('0. Sair')
+
+
         opcao = input('Escolha uma opção:')
 
         if opcao == '1':
@@ -102,5 +108,6 @@ def main():
 # -----------------------
 # Execução
 # -----------------------
+tarefas = carregar_tarefas()
 if __name__ == '__main__':
     main()
