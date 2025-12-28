@@ -14,53 +14,53 @@ def exibir_menu():
     print('4. Sair')
 
 
-def adicionar_tarefa():
-    ...
+def adicionar_tarefa(tarefas):
     '''
    Adiciona uma nova tarefa à lista.
    '''
-    descricao = input('Digite a descrição da tarefa:')
-    if descricao.strip() == '':
+    descricao = (input('Digite a descrição da tarefa:').strip())
+    if descricao == '':
         print('A tarefa não pode ser vazia')
-        return
+        return tarefas
     
     tarefas.append(descricao)
     salvar_tarefas(tarefas)
     print('Tarefa adicionada com sucesso!')
-    
+    return tarefas
 
     
-def listar_tarefas():
-    ...
+def listar_tarefas(tarefas):
+    tarefas = carregar_tarefas(tarefas)
     '''
     Lista todas as tarefas cadastradas.
     '''
     if len(tarefas) == 0:
         print('Nenhuma tarefa cadastrada.')
-    else:
+        return
+    
         print('\n--- TAREFAS ---')
         for indice, tarefa in enumerate(tarefas, start=1):
-            print(f'{indice}. {tarefa}')
+            print(f'{indice}.{tarefa}')
 
 
-def remover_tarefa():
-    ...
+def remover_tarefa(tarefas):
+    tarefas = carregar_tarefas()
     '''
     Remove uma tarefa da lista.
     '''
     if len(tarefas) == 0:
-        print('nenhuma tarefa cadrastrada para remover.')
-        return
+        print('Nenhuma tarefa cadrastrada para remover.')
+        return tarefas
 
-    listar_tarefas()
+    listar_tarefas(tarefas)
 
     try:
         indice = int(input('Digite o numero da tarefa que deseja remover:'))
-        tarefa_removida = tarefas.pop(indice - 1)
+        tarefas.pop(indice - 1)
         salvar_tarefas(tarefas)
-        print(f'Tarefa removida: {tarefa_removida}')
     except (ValueError, IndexError):
         print('Opção inválida. tente novamente.')
+        return tarefas
 
 
 def carregar_tarefas():
@@ -82,23 +82,27 @@ def salvar_tarefas(tarefas):
         json.dump(tarefas, arquivo, ensure_ascii=False, indent=2)
 
 def main():
-    ...
+    tarefas = carregar_tarefas()
+
     while True:
-        exibir_menu()
+        print('\n1. Adicionar tarefa')
+        print('2. Listar tarefas')
+        print('3. Remover tarefa')
+        print('0. Sair')
+        
         opcao = input('Escolha uma opção:')
 
         if opcao == '1':
-            adicionar_tarefa()
+            tarefas = adicionar_tarefa(tarefas)
         elif opcao == '2':
-            listar_tarefas()
+            listar_tarefas(tarefas)
         elif opcao == '3':
-            remover_tarefa()
-        elif opcao == '4':
+           tarefas = remover_tarefa(tarefas)
+        elif opcao == '0':
             print('Saindo do programa. Até logo!')
             break
         else:
             print('Opção inválida. Tente novamente.')
 
 if __name__ == '__main__':
-    tarefas = carregar_tarefas()
     main()
