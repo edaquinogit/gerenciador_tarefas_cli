@@ -28,7 +28,8 @@ def adicionar_tarefa(tarefas):
         print('A tarefa não pode ser vazia!')
         return tarefas
     
-    tarefas.append(descricao)
+    nova_tarefa = {'descricao': descricao, 'status': 'pendente'}
+    tarefas.append(nova_tarefa)
     salvar_tarefas(tarefas)
 
     print('Tarefa adicionada com sucesso')
@@ -41,7 +42,8 @@ def listar_tarefas(tarefas):
         print('Nenhuma tarefa cadastrada.')
     else:
         for i, tarefa in enumerate(tarefas, start=1):
-            print(f'{i}')
+            print(f'{i}. {tarefa['descricao']} - {tarefa['status']}')
+            
 
             input('\nPressione ENTER para voltar ao menu...')
         
@@ -83,6 +85,7 @@ def main():
     while True:
         print('\n1. Adicionar tarefa')
         print('2. Listar tarefas')
+        print('3. Remover tarefa')
         print('0. Sair')
 
 
@@ -108,6 +111,5 @@ def main():
 # -----------------------
 # Execução
 # -----------------------
-tarefas = carregar_tarefas()
 if __name__ == '__main__':
     main()
