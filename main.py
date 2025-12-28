@@ -1,7 +1,7 @@
 import json
 import os
 
-tarefas = []
+ARQUIVO_TAREFAS = 'tarefas.json'
 
 def exibir_menu():
     '''
@@ -15,21 +15,23 @@ def exibir_menu():
 
 
 def adicionar_tarefa():
+    ...
     '''
    Adiciona uma nova tarefa à lista.
    '''
     descricao = input('Digite a descrição da tarefa:')
-    tarefas.append(tarefas)
+    if descricao.strip() == '':
+        print('A tarefa não pode ser vazia')
+        return
+    
+    tarefas.append(descricao)
     salvar_tarefas(tarefas)
     print('Tarefa adicionada com sucesso!')
-    if descricao.strip() == '':
-        print('A tarefa não pode ser vazia.')
-    else:
-        tarefas.append(descricao)
-        print('Tarefa adicionada com sucesso!')
+    
 
     
 def listar_tarefas():
+    ...
     '''
     Lista todas as tarefas cadastradas.
     '''
@@ -42,6 +44,7 @@ def listar_tarefas():
 
 
 def remover_tarefa():
+    ...
     '''
     Remove uma tarefa da lista.
     '''
@@ -61,6 +64,7 @@ def remover_tarefa():
 
 
 def carregar_tarefas():
+    ...
     '''
     Carrega as tarefas do arquivo JSON.
     '''
@@ -70,6 +74,7 @@ def carregar_tarefas():
         return json.load(arquivo)
     
 def salvar_tarefas(tarefas):
+    ...
     '''
     Salva as tarefas no arquivo JSON.
     '''
@@ -77,6 +82,7 @@ def salvar_tarefas(tarefas):
         json.dump(tarefas, arquivo, ensure_ascii=False, indent=2)
 
 def main():
+    ...
     while True:
         exibir_menu()
         opcao = input('Escolha uma opção:')
@@ -94,4 +100,5 @@ def main():
             print('Opção inválida. Tente novamente.')
 
 if __name__ == '__main__':
+    tarefas = carregar_tarefas()
     main()
