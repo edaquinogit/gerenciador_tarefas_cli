@@ -1,6 +1,8 @@
 import json
 import os
 
+from src.models import Tarefa
+
 ARQUIVO_TAREFAS = 'tarefas.json'
 
 #------------------------
@@ -113,5 +115,6 @@ def main():
 # -------------------------
 from src.cli import menu
 
-if __name__ == '__main__':
-    menu()
+if __name__ == "__main__":
+    t = Tarefa("teste")
+    print(t.to_dict())

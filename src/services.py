@@ -19,5 +19,5 @@ def remover(indice: int) -> None:
 def concluir(indice: int) -> None:
     tarefas = carregar_tarefas()
     if 0 <= indice < len(tarefas):
-      tarefas[indice].status = 'Concluida'
-      salvar_tarefas(tarefas)
+        tarefas[indice].status = 'Concluida'
+        salvar_tarefas(tarefas)
