@@ -18,5 +18,5 @@ Este é meu primeiro projeto completo, construído durante meus estudos iniciais
 ## Como Executar
 
 1. Clone o repositório:
-```bash
-git clone [Gerenciador_CLI](https://github.com/edaquinogit/gerenciador_tarefas_cli)
+
+git clone: [Gerenciador_CLI](https://github.com/edaquinogit/gerenciador_tarefas_cli)
