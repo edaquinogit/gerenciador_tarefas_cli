@@ -1,2 +1,6 @@
-__pychace__/
-*.__pyc
+# Python
+__pycache__/
+*.pyc
+
+# Dados locais
+data/
