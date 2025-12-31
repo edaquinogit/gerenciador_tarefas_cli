@@ -1,27 +1,25 @@
 import json
-from pathlib import Path
-from typing import List
+import os
 from src.models import Tarefa
 
-ARQUIVO_TAREFAS = Path('tarefas.json')
+CAMINHO_ARQUIVO = os.path.join("data", "tarefas.json")
 
-def carregar_tarefas() -> List[Tarefa]:
-    if not ARQUIVO_TAREFAS.exists():
+
+def salvar_tarefas(tarefas):
+    os.makedirs("data", exist_ok=True)
+    with open(CAMINHO_ARQUIVO, "w", encoding="utf-8") as f:
+        json.dump(
+            [t.to_dict() for t in tarefas],
+            f,
+            ensure_ascii=False,
+            indent=2
+        )
+
+
+def carregar_tarefas():
+    if not os.path.exists(CAMINHO_ARQUIVO):
         return []
-    try: 
-        if ARQUIVO_TAREFAS.stat().st_size == 0:
-            return[]
-        with open(ARQUIVO_TAREFAS, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-        if not isinstance(data, list):
-            return[]
-        
-        return [Tarefa.from_dict(item) for item in data]
-    except (json.JSONDecodeError, OSError):
 
-       return[]
-
-    
-def salvar_tarefas(tarefas: List[Tarefa]) -> None:
-    with open(ARQUIVO_TAREFAS, 'w',  encoding='utf-8') as f:
-        json.dump([t.to_dict() for t in tarefas], f, ensure_ascii=False, ident=2)
+    with open(CAMINHO_ARQUIVO, "r", encoding="utf-8") as f:
+        dados = json.load(f)
+        return [Tarefa.from_dict(d) for d in dados]
