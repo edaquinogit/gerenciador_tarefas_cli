@@ -1,8 +1,12 @@
 # 🧩 Gerenciador de Tarefas CLI em Python
 
+![Python](https://img.shields.io/badge/python-3.10+-blue)
+![Status](https://img.shields.io/badge/status-concluído-green)
+![Tipo](https://img.shields.io/badge/projeto-estudo%20prático-informational)
+
 Projeto desenvolvido em **Python** para gerenciamento de tarefas via **linha de comando (CLI)**, com foco no aprendizado prático de **lógica de programação**, **organização de código**, **persistência de dados** e **boas práticas iniciais de desenvolvimento backend**.
 
-Este é meu **primeiro projeto completo**, construído durante meus estudos em programação e com apoio de **Inteligência Artificial como ferramenta de aprendizado**, sempre buscando entender cada parte do código.
+Este é meu **primeiro projeto completo**, construído durante meus estudos em programação, utilizando **Inteligência Artificial como ferramenta de apoio ao aprendizado**, sempre priorizando a compreensão do código e das decisões técnicas.
 
 ---
 
@@ -10,7 +14,7 @@ Este é meu **primeiro projeto completo**, construído durante meus estudos em p
 
 - Criar novas tarefas  
 - Listar tarefas cadastradas  
-- Atualizar status das tarefas  
+- Atualizar o status das tarefas  
 - Remover tarefas  
 - Persistência de dados (as tarefas permanecem salvas entre execuções)
 
@@ -21,7 +25,15 @@ Este é meu **primeiro projeto completo**, construído durante meus estudos em p
 - **Python 3**
 - **SQLite** (persistência de dados)
 - **Git & GitHub**
-- **Arquitetura simples em camadas (CLI, serviços, modelos)**
+- **Aplicação CLI (Command Line Interface)**
+
+---
+
+## 📌 Pré-requisitos
+
+- Python **3.10 ou superior**
+- Git
+- Terminal (Windows, Linux ou macOS)
 
 ---
 
@@ -33,7 +45,7 @@ gerenciador_tarefas_cli/
 │   ├── cli.py        # Interface de linha de comando
 │   ├── services.py  # Regras de negócio
 │   ├── models.py    # Modelos de dados
-│   ├── storage.py   # Persistência (SQLite)
+│   ├── storage.py   # Persistência de dados (SQLite)
 │   └── init.py
 │
 ├── main.py           # Ponto de entrada da aplicação
@@ -47,17 +59,34 @@ gerenciador_tarefas_cli/
 
 ### 1️⃣ Clone o repositório
 
-```bash
+
 git clone https://github.com/edaquinogit/gerenciador_tarefas_cli.git
 
 2️⃣ Acesse a pasta do projeto
 
 cd gerenciador_tarefas_cli
 
-3️⃣ Execute o programa
+3️⃣ Execute a aplicação
 
 python main.py
 
+```bash
+🖥️ Exemplo de Uso no Terminal
+
+$ python main.py
+
+1 - Criar tarefa
+2 - Listar tarefas
+3 - Atualizar status
+4 - Remover tarefa
+5 - Sair
+
+Escolha uma opção: 1
+Digite o título da tarefa: Estudar Python
+Digite a descrição: Revisar conceitos de funções
+Tarefa criada com sucesso!
+
+```
 🧠 O que aprendi com este projeto
 Organização de código em múltiplos arquivos
 
@@ -68,13 +97,16 @@ Separação de responsabilidades
 Manipulação de dados persistentes
 
 
-Tratamento básico de erros e entradas do usuário
+Uso de banco de dados SQLite
 
 
-Uso do Git para versionamento
+Tratamento básico de entradas do usuário
 
 
-Como transformar um problema simples em um projeto funcional
+Versionamento de código com Git e GitHub
+
+
+Como transformar um problema simples em uma aplicação funcional
 
 
 
@@ -91,12 +123,12 @@ Criar documentação técnica mais detalhada
 Evoluir o projeto para uma API REST futuramente
 
 
-
 👨‍💻 Sobre mim
 Sou estudante de Gestão da Tecnologia da Informação, com foco em Backend Python, automação e aprendizado prático através de projetos reais.
-📌 Estou em busca de oportunidades de estágio ou vaga júnior, onde eu possa continuar aprendendo e contribuindo com o time.
-🔗 LinkedIn:https://www.linkedin.com/in/ednaldo-aquino-6536892b5
+📌 Estou em busca de oportunidades de estágio ou vaga júnior, onde eu possa continuar evoluindo tecnicamente e contribuir com o time.
+🔗 LinkedIn: https://www.linkedin.com/in/ednaldo-aquino-6536892b5
 
 ⭐ Observação Final
-Este projeto representa meu nível atual de aprendizado e minha capacidade de aprender, estruturar e finalizar uma solução funcional, algo essencial para quem está iniciando na área de tecnologia.
-Feedbacks e sugestões são muito bem-vindos.
+Este projeto representa meu nível atual de aprendizado e minha capacidade de planejar, estruturar e finalizar uma solução funcional, habilidades fundamentais para quem está iniciando na área de tecnologia.
+Feedbacks e sugestões são sempre bem-vindos.
+
