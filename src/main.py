@@ -1,11 +1,12 @@
 from src.models import Tarefa
 from src.storage import salvar_tarefas, carregar_tarefas
+from src.tasks import add_task, list_tasks, remove_task
 
 
 def mostrar_menu():
     print("\n=== GERENCIADOR DE TAREFAS ===")
-    print("1 - Listar tarefas")
-    print("2 - Adicionar tarefa")
+    print("1 - Adicionar tarefas")
+    print("2 - Listar tarefa")
     print("3 - Concluir tarefa")
     print("4 - Excluir tarefa(s)")
     print("5 - Sair")
@@ -71,11 +72,10 @@ def main():
         opcao = input("Escolha uma opção: ").strip()
 
         if opcao == "1":
-            listar_tarefas(tarefas)
-
-        elif opcao == "2":
             adicionar_tarefa(tarefas)
             salvar_tarefas(tarefas)
+        elif opcao == "2":
+            listar_tarefas(tarefas)
 
         elif opcao == "3":
             concluir_tarefa(tarefas)
@@ -93,5 +93,13 @@ def main():
             print("Opção inválida. Tente novamente.")
 
 
+def print_help():
+    print("Uso:")
+    print("python src/main.py add \"Título da tarefa\"")
+    print("python src/main.py list'")
+    print("python src/main.py remove <indice>")
+
 if __name__ == "__main__":
-    main()
+    print(add_task("Estudar Python"))
+    print(list_tasks())
+    print(remove_task(0))

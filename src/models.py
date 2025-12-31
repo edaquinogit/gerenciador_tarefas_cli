@@ -1,19 +1,8 @@
-from dataclasses import dataclass, asdict
-
-@dataclass
+# src/models.py
 class Tarefa:
-    descricao: str
-    status: str = 'Pendente'
+    def __init__(self, titulo, status="pendente"):
+        self.titulo = titulo
+        self.status = status
 
-    def concluir(self):
-        self.status = 'Concluida'
-
-    def to_dict(self):
-        return asdict(self)
-
-    @staticmethod
-    def from_dict(data: dict):
-        return Tarefa(
-            descricao=data['descricao'],
-            status=data.get('status', 'Pendente')
-        )
+    def __repr__(self):
+        return f"<Tarefa titulo={self.titulo} status={self.status}>"
