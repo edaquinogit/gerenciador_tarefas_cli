@@ -1,120 +1,97 @@
-import json
-import os
-
 from src.models import Tarefa
+from src.storage import salvar_tarefas, carregar_tarefas
 
-ARQUIVO_TAREFAS = 'tarefas.json'
 
-#------------------------
-# Persistencia de dados
-# -----------------------
+def mostrar_menu():
+    print("\n=== GERENCIADOR DE TAREFAS ===")
+    print("1 - Listar tarefas")
+    print("2 - Adicionar tarefa")
+    print("3 - Concluir tarefa")
+    print("4 - Excluir tarefa(s)")
+    print("5 - Sair")
 
-def carregar_tarefas():
-    if not os.path.exists(ARQUIVO_TAREFAS):
-        return []
-    
-    with open(ARQUIVO_TAREFAS, 'r', encoding='utf-8') as arquivo:
-        return json.load(arquivo)
-    
-def salvar_tarefas(tarefas):
-    with open(ARQUIVO_TAREFAS, 'w', encoding='utf-8') as arquivo:
-        json.dump(tarefas, arquivo, ensure_ascii=False, indent=2)
-
-# -----------------------
-# Funcionalidades
-# -----------------------
-def adicionar_tarefa(tarefas):
-    descricao = input('Digite a descrição da Tarefa:').strip()
-
-    if not descricao:
-        print('A tarefa não pode ser vazia!')
-        return tarefas
-    
-    nova_tarefa = {'descricao': descricao, 'status': 'pendente'}
-    tarefas.append(nova_tarefa)
-    salvar_tarefas(tarefas)
-
-    print('Tarefa adicionada com sucesso')
-    return tarefas
 
 def listar_tarefas(tarefas):
-    print('\n--- TAREFAS ---')
-
     if not tarefas:
-        print('Nenhuma tarefa cadastrada.')
+        print("Nenhuma tarefa cadastrada.")
+        return
+
+    for i, tarefa in enumerate(tarefas, start=1):
+        status = "Concluída" if tarefa.status == "Concluida" else "Pendente"
+        print(f"{i}. [{status}] {tarefa.descricao}")
+
+
+def adicionar_tarefa(tarefas):
+    descricao = input("Digite a descrição da tarefa: ").strip()
+    if descricao:
+        tarefas.append(Tarefa(descricao))
+        print("Tarefa adicionada com sucesso.")
     else:
-        for i, tarefa in enumerate(tarefas, start=1):
-            print(f'{i}. {tarefa['descricao']} - {tarefa['status']}')
-            
+        print("Descrição inválida.")
 
-            input('\nPressione ENTER para voltar ao menu...')
-        
 
-def remover_tarefa(tarefas):
-    if not tarefas:
-        print('Nenhuma tarefa para remover.')
-        input('Pressione ENTER para voltar ao menu...')
-        return tarefas
-    
+def concluir_tarefa(tarefas):
     listar_tarefas(tarefas)
 
     try:
-        indice = int(input('Digite o número da tarefa:'))
-        tarefa_removida = tarefas.pop(indice - 1)
-        salvar_tarefas(tarefas)
-        print(f'Tarefa removida: {tarefa_removida}')
+        indice = int(input("Digite o número da tarefa para concluir: "))
+        tarefas[indice - 1].concluir()
+        print("Tarefa concluída.")
     except (ValueError, IndexError):
-        print('Número invalido.')
+        print("Número inválido.")
 
-        input('Pressione ENTER para voltar ao menu')
-        return tarefas
-    
 
-# -----------------------
-# Interface do úsuario
-# -----------------------
-def exibir_menu():
-    print('\n--- GERENCIADOR DE TAREFAS ---')
-    print('1. Adicionar tarefa')
-    print('2. Listar tarefas')
-    print('3. Remover tarefa')
-    print('0. Sair')
+def excluir_tarefas(tarefas):
+    listar_tarefas(tarefas)
+
+    entrada = input(
+        "Digite os números das tarefas para excluir (ex: 1,3,5): "
+    )
+
+    try:
+        indices = sorted(
+            {int(i.strip()) - 1 for i in entrada.split(",")},
+            reverse=True
+        )
+
+        for i in indices:
+            if 0 <= i < len(tarefas):
+                tarefas.pop(i)
+
+        print("Tarefa(s) excluída(s) com sucesso.")
+    except ValueError:
+        print("Entrada inválida.")
 
 
 def main():
     tarefas = carregar_tarefas()
 
     while True:
-        print('\n1. Adicionar tarefa')
-        print('2. Listar tarefas')
-        print('3. Remover tarefa')
-        print('0. Sair')
+        mostrar_menu()
+        opcao = input("Escolha uma opção: ").strip()
 
-
-        opcao = input('Escolha uma opção:')
-
-        if opcao == '1':
-            tarefas = adicionar_tarefa(tarefas)
-
-        elif opcao == '2':
+        if opcao == "1":
             listar_tarefas(tarefas)
 
-        elif opcao == '3':
-            tarefas = remover_tarefa(tarefas)
+        elif opcao == "2":
+            adicionar_tarefa(tarefas)
+            salvar_tarefas(tarefas)
 
-        elif opcao == '0':
-            print('Saindo do programa. Até logo!')
+        elif opcao == "3":
+            concluir_tarefa(tarefas)
+            salvar_tarefas(tarefas)
+
+        elif opcao == "4":
+            excluir_tarefas(tarefas)
+            salvar_tarefas(tarefas)
+
+        elif opcao == "5":
+            print("Saindo... até logo!")
             break
 
         else:
-            print('Opção invalida')
+            print("Opção inválida. Tente novamente.")
 
-
-# -----------------------
-# Execução
-# -------------------------
-from src.cli import menu
 
 if __name__ == "__main__":
-    t = Tarefa("teste")
-    print(t.to_dict())
+    main()
