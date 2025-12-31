@@ -4,36 +4,31 @@
 ![Status](https://img.shields.io/badge/status-concluído-green)
 ![Tipo](https://img.shields.io/badge/projeto-estudo%20prático-informational)
 
-Projeto desenvolvido em **Python** para gerenciamento de tarefas via **linha de comando (CLI)**, com foco no aprendizado prático de **lógica de programação**, **organização de código**, **persistência de dados** e **boas práticas iniciais de desenvolvimento backend**.
+Projeto de **linha de comando (CLI)** desenvolvido em **Python**. Permite gerenciar tarefas com persistência, interface colorida e menu interativo.  
 
-Este é meu **primeiro projeto completo**, construído durante meus estudos em programação, utilizando **Inteligência Artificial como ferramenta de apoio ao aprendizado**, sempre priorizando a compreensão do código e das decisões técnicas.
+Mostra boas práticas de programação, modularidade e atenção à experiência do usuário.
 
 ---
 
 ## 🚀 Funcionalidades
 
-- Criar novas tarefas  
-- Listar tarefas cadastradas  
-- Atualizar o status das tarefas  
-- Remover tarefas  
-- Persistência de dados (as tarefas permanecem salvas entre execuções)
+- Adicionar **múltiplas tarefas** de uma vez, evitando duplicatas.
+- Remover tarefas pelo **número da lista**.
+- Listar tarefas numeradas com cores.
+- Persistência de tarefas em `tasks.json`.
+- Validação de entradas e tratamento de erros.
+- Interface amigável e intuitiva com **colorama**.
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## 💻 Tecnologias e Conceitos
 
-- **Python 3**
-- **SQLite** (persistência de dados)
-- **Git & GitHub**
-- **Aplicação CLI (Command Line Interface)**
-
----
-
-## 📌 Pré-requisitos
-
-- Python **3.10 ou superior**
-- Git
-- Terminal (Windows, Linux ou macOS)
+- **Python 3.10+**
+- **colorama** → interface colorida no terminal.
+- **JSON** → armazenamento persistente de dados.
+- Modularização (`tasks.py` e `main.py` separados).
+- Funções, loops, listas e tratamento de exceções.
+- Estrutura de pacotes Python (`src`).
 
 ---
 
@@ -41,94 +36,84 @@ Este é meu **primeiro projeto completo**, construído durante meus estudos em p
 
 gerenciador_tarefas_cli/
 │
-├── src/
-│   ├── cli.py        # Interface de linha de comando
-│   ├── services.py  # Regras de negócio
-│   ├── models.py    # Modelos de dados
-│   ├── storage.py   # Persistência de dados (SQLite)
-│   └── init.py
-│
-├── main.py           # Ponto de entrada da aplicação
-├── tarefas.db        # Banco de dados SQLite
-├── README.md
-├── .gitignore
-└── LICENSE
+├─ .venv/ # Ambiente virtual
+├─ src/
+│ ├─ init.py # Pacote Python
+│ ├─ main.py # Menu interativo do CLI
+│ └─ tasks.py # Funções de gerenciamento de tarefas
+├─ tasks.json # Armazena tarefas persistentes
+└─ README.md # Documentação do projeto
+
 ---
 
-## ▶️ Como Executar o Projeto
+## ⚡ Como Executar
 
-### 1️⃣ Clone o repositório
-
-
-git clone https://github.com/edaquinogit/gerenciador_tarefas_cli.git
-
-2️⃣ Acesse a pasta do projeto
-
-cd gerenciador_tarefas_cli
-
-3️⃣ Execute a aplicação
-
-python main.py
+1. Clone o repositório:
 
 ```bash
-🖥️ Exemplo de Uso no Terminal
+git clone <https://github.com/edaquinogit/gerenciador_tarefas_cli>
+cd gerenciador_tarefas_cli
 
-$ python main.py
+Crie e ative o ambiente virtual:
 
-1 - Criar tarefa
-2 - Listar tarefas
-3 - Atualizar status
-4 - Remover tarefa
-5 - Sair
+python -m venv .venv
+
+.\.venv\Scripts\activate  # Windows
+
+# source .venv/bin/activate  # Linux / Mac
+
+Instale dependências:
+
+pip install colorama
+
+Execute o programa:
+
+python -m src.main
+```
+**🎯 Exemplos de Uso**
+
+*Adicionar tarefas:*
 
 Escolha uma opção: 1
-Digite o título da tarefa: Estudar Python
-Digite a descrição: Revisar conceitos de funções
-Tarefa criada com sucesso!
 
-```
-🧠 O que aprendi com este projeto
-Organização de código em múltiplos arquivos
+Digite as tarefas separadas por vírgula: Estudar Python, Ler documentação
 
+*Remover tarefas por número:*
 
-Separação de responsabilidades
+Escolha uma opção: 2
 
+Digite os números das tarefas para remover, separados por vírgula: 1
 
-Manipulação de dados persistentes
+Listar tarefas:
 
+*Tarefas atuais:*
 
-Uso de banco de dados SQLite
+1. Ler documentação
 
+**✅ Boas Práticas Demonstradas**
 
-Tratamento básico de entradas do usuário
+Modularização em funções reutilizáveis (add_tasks, remove_tasks, list_tasks).
 
+Persistência de dados com JSON.
 
-Versionamento de código com Git e GitHub
+Interface colorida e amigável com colorama.
 
+Validação de entradas, tratamento de erros e mensagens de feedback.
 
-Como transformar um problema simples em uma aplicação funcional
+Organização do projeto em pacotes Python, alinhado a boas práticas de desenvolvimento.
 
+**🔮 Próximos Passos / Evolução**
 
+Adicionar prioridade ou categoria às tarefas.
 
-📌 Próximos Passos (Evolução Planejada)
-Melhorar validação de entradas do usuário
+Implementar edição de tarefas no CLI.
 
+Exportar tarefas para CSV ou TXT.
 
-Adicionar testes automatizados básicos
+Criar testes automatizados com pytest ou unittest.
 
+Implementar logs de ações para histórico de tarefas.
 
-Criar documentação técnica mais detalhada
+👤 Autor:
 
-
-Evoluir o projeto para uma API REST futuramente
-
-
-👨‍💻 Sobre mim
-Sou estudante de Gestão da Tecnologia da Informação, com foco em Backend Python, automação e aprendizado prático através de projetos reais.
-📌 Estou em busca de oportunidades de estágio ou vaga júnior, onde eu possa continuar evoluindo tecnicamente e contribuir com o time.
-🔗 LinkedIn: https://www.linkedin.com/in/ednaldo-aquino-6536892b5
-
-⭐ Observação Final
-Este projeto representa meu nível atual de aprendizado e minha capacidade de planejar, estruturar e finalizar uma solução funcional, habilidades fundamentais para quem está iniciando na área de tecnologia.
-Feedbacks e sugestões são sempre bem-vindos.
-
+Ednaldo Aquino Santos – Desenvolvedor iniciante em Python, focado em problemas reais, boas práticas e projetos práticos para o mercado de TI.
